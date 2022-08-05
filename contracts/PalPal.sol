@@ -59,4 +59,41 @@ contract PalPal {
             0
         );
     }
+
+    // Like the content
+    function likeContent(uint256 _id) public validContent(_id) {
+        likes[_id].push(msg.sender);
+        contents[_id].likesCount++;
+    }
+
+    // Tip the content creator
+    function tipCreator(uint256 _id) public validContent(_id) {
+        require(msg.sender != contents[_id].creator, "Can't tip yourself");
+        tips[_id].push(msg.sender);
+        contents[_id].tipsCount++;
+    }
+
+    // Comment on the content
+    function commentContent(uint256 _id, string memory _comment)
+        public
+        validContent(_id)
+    {
+        comments[_id].push(Comment(msg.sender, _comment));
+        contents[_id].commentsCount++;
+    }
+
+    // Get Content's likes
+    function getLikes(uint256 _id) public view returns (address[] memory) {
+        return likes[_id];
+    }
+
+    // Get Content's tips
+    function getTips(uint256 _id) public view returns (address[] memory) {
+        return tips[_id];
+    }
+
+    // Get Content's comments
+    function getComments(uint256 _id) public view returns (Comment[] memory) {
+        return comments[_id];
+    }
 }
