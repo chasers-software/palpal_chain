@@ -67,8 +67,9 @@ contract PalPal {
     }
 
     // Tip the content creator
-    function tipCreator(uint256 _id) public validContent(_id) {
+    function tipCreator(uint256 _id) public payable validContent(_id) {
         require(msg.sender != contents[_id].creator, "Can't tip yourself");
+        payable(contents[_id].creator).transfer(msg.value);
         tips[_id].push(msg.sender);
         contents[_id].tipsCount++;
     }
