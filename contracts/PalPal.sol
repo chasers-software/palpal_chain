@@ -2,7 +2,26 @@
 
 pragma solidity ^0.8.9;
 
-contract PalPal {
+// Import openzeppelin contract
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "hardhat/console.sol";
+
+// PalPal Contract inherits ERC721 from openzeppelin
+contract PalPal is ERC721URIStorage {
+    // Main identifier used as content's id
+    uint256 public contentCount = 0;
+
+    //constructor
+    constructor() ERC721("PalPalNFT", "PPNFT") {
+        console.log("This is PalPal NFT Contract");
+    }
+
+    // mint NFT
+    function makeAnNFT() public {
+        _safeMint(msg.sender, contentCount);
+        _setTokenURI(contentCount, "https://jsonkeeper.com/b/OQEJ");
+    }
+
     // Content structure definition
     struct Content {
         // Unique content specification
@@ -24,9 +43,6 @@ contract PalPal {
         address commentor;
         string comment;
     }
-
-    // Main identifier used as content's id
-    uint256 public contentCount = 0;
 
     // mappings
     mapping(uint256 => Content) public contents;
@@ -58,6 +74,7 @@ contract PalPal {
             0,
             0
         );
+        makeAnNFT();
     }
 
     // Like the content
