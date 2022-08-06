@@ -12,7 +12,7 @@ contract PalPal is ERC721URIStorage {
     uint256 public contentCount = 0;
 
     //constructor
-    constructor() ERC721("PalPalNFT", "PPNFT") {
+    constructor() ERC721("NFT Pal-Pal", "NFT-PP") {
         console.log("This is PalPal NFT Contract");
     }
 
