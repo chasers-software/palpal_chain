@@ -19,7 +19,7 @@ contract PalPal is ERC721URIStorage {
     // mint NFT
     function makeAnNFT() public {
         _safeMint(msg.sender, contentCount);
-        _setTokenURI(contentCount, "https://jsonkeeper.com/b/OQEJ");
+        _setTokenURI(contentCount, "https://jsonkeeper.com/b/4VXC");
     }
 
     // Content structure definition
